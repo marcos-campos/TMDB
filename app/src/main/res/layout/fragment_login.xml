@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".main.LoginFragment">
+
+    <ImageView
+        android:id="@+id/login_iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/image_background"/>
+
+    <View
+        android:id="@+id/login_view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/login_view"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:alpha="0.8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/login_et_user"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:hint="Usuário"
+        android:drawableEnd="@drawable/ic_contact"
+        android:inputType="textEmailAddress"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/login_view"
+        app:layout_constraintEnd_toEndOf="@id/login_view"
+        app:layout_constraintBottom_toTopOf="@id/login_view_divider"/>
+
+    <EditText
+        android:id="@+id/login_et_password"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:drawableEnd="@drawable/ic_visible"
+        android:inputType="numberPassword"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/login_view"
+        app:layout_constraintEnd_toEndOf="@id/login_view"
+        app:layout_constraintTop_toBottomOf="@id/login_view_divider" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_btn"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:text="Entrar"
+        android:textColor="@color/white"
+        android:background="@drawable/round_btn"
+        app:layout_constraintStart_toStartOf="@id/login_view"
+        app:layout_constraintEnd_toEndOf="@id/login_view"
+        app:layout_constraintTop_toBottomOf="@id/login_et_password"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/login_tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registre-se"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/login_btn"
+        app:layout_constraintStart_toStartOf="@id/login_btn"
+        android:layout_marginTop="5dp"/>
+
+    <ImageView
+        android:id="@+id/login_iv_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_logo_tmdb"
+        app:layout_constraintBottom_toTopOf="@id/login_et_user"
+        app:layout_constraintStart_toStartOf="@id/login_view"
+        app:layout_constraintEnd_toEndOf="@id/login_view"
+        android:layout_marginBottom="50dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
