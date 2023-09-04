@@ -28,11 +28,11 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: MovieDetailsViewHolder, position: Int) {
 
         val baseUrl = "https://image.tmdb.org/t/p/"
-        val tamanhoImage = "w500/"
-        val poster = movieList[position].posterPath
+        val imageSize = "w500/"
+        val posterUrl = movieList[position].posterPath
 
         val moviesImages = holder.movieImage
-        Picasso.with(context).load(baseUrl + tamanhoImage + poster).fit().into(moviesImages)
+        Picasso.with(context).load(baseUrl + imageSize + posterUrl).fit().into(moviesImages)
 
         holder.movieTitle.text = movieList[position].title
     }
