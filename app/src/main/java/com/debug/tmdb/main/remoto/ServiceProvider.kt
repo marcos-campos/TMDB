@@ -5,7 +5,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private const val baseUrl = "https://api.themoviedb.org/3/"
-private val mediaType = "application/json".toMediaType()
 
 object ServiceProvider {
 

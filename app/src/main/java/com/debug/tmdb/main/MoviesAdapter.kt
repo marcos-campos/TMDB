@@ -1,4 +1,45 @@
 package com.debug.tmdb.main
 
-class MoviesAdapter {
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.debug.tmdb.R
+import com.debug.tmdb.main.remoto.MovieResponse
+import com.squareup.picasso.Picasso
+
+class MoviesAdapter(
+    val context: Context,
+    val movieList: MutableList<MovieResponse>
+): RecyclerView.Adapter<MoviesAdapter.MovieDetailsViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieDetailsViewHolder {
+        val movieDetailsItem =
+            LayoutInflater.from(context).inflate(R.layout.movie_detail, parent, false)
+
+        return MovieDetailsViewHolder(movieDetailsItem)
+    }
+
+    override fun getItemCount(): Int = movieList.size
+
+    override fun onBindViewHolder(holder: MovieDetailsViewHolder, position: Int) {
+
+        val baseUrl = "https://image.tmdb.org/t/p/"
+        val tamanhoImage = "w500/"
+        val poster = movieList[position].posterPath
+
+        val moviesImages = holder.movieImage
+        Picasso.with(context).load(baseUrl + tamanhoImage + poster).fit().into(moviesImages)
+
+        holder.movieTitle.text = movieList[position].title
+    }
+
+    inner class MovieDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val movieTitle = itemView.findViewById<TextView>(R.id.movie_detail_title_movie)
+        val movieImage = itemView.findViewById<ImageView>(R.id.movie_detail_image_movie)
+
+    }
 }
