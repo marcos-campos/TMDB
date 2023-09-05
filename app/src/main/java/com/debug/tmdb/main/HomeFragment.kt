@@ -2,6 +2,7 @@ package com.debug.tmdb.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,9 @@ import com.debug.tmdb.main.remoto.ServiceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.lang.Exception
+import java.net.HttpURLConnection
 
 
 class HomeFragment : Fragment() {
@@ -68,11 +72,32 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getMovies() {
         lifecycleScope.launch(Dispatchers.IO){
-            val value = ServiceProvider.service.getMovies(BuildConfig.tmdbToken)
 
-            withContext(Dispatchers.Main){
-                movieList.addAll(value.results)
-                adapterMovieDetail?.notifyDataSetChanged()
+            try{
+                val value = ServiceProvider.service.getMovies(BuildConfig.tmdbToken)
+
+                withContext(Dispatchers.Main){
+                    movieList.addAll(value.results)
+                    adapterMovieDetail?.notifyDataSetChanged()
+                }
+            } catch (exception: HttpException) {
+                when(exception.code()){
+                    HttpURLConnection.HTTP_BAD_REQUEST -> {
+                        //error 400
+                    }
+                    HttpURLConnection.HTTP_NOT_FOUND -> {
+                        //error 404
+                    }
+                    HttpURLConnection.HTTP_INTERNAL_ERROR -> {
+                        //error 500
+                    }
+                    else -> {
+                        //some other error
+                    }
+                }
+
+            } catch (exception: Exception){
+                Log.e("error", exception.toString())
             }
         }
     }
@@ -80,12 +105,34 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun getComicBookMovies() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val value = ServiceProvider.service.getComicBookMovies(1, BuildConfig.tmdbToken)
 
-            withContext(Dispatchers.Main) {
-                comicBookMovieList.addAll(value.items)
-                adapterComicBookDetail?.notifyDataSetChanged()
+            try {
+                val value = ServiceProvider.service.getComicBookMovies(1, BuildConfig.tmdbToken)
+
+                withContext(Dispatchers.Main) {
+                    comicBookMovieList.addAll(value.items)
+                    adapterComicBookDetail?.notifyDataSetChanged()
+                }
+            } catch (exception: HttpException) {
+                when(exception.code()){
+                    HttpURLConnection.HTTP_BAD_REQUEST -> {
+                        //error 400
+                    }
+                    HttpURLConnection.HTTP_NOT_FOUND -> {
+                        //error 404
+                    }
+                    HttpURLConnection.HTTP_INTERNAL_ERROR -> {
+                        //error 500
+                    }
+                    else -> {
+                        //some other error
+                    }
+                }
+
+            } catch (exception: Exception){
+                Log.e("error", exception.toString())
             }
+
         }
     }
 }
