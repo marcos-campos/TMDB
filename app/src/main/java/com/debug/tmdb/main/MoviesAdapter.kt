@@ -34,11 +34,11 @@ class MoviesAdapter(
         val moviesImages = holder.movieImage
         Picasso.with(context).load(baseUrl + imageSize + posterUrl).fit().into(moviesImages)
 
-        holder.movieTitle.text = movieList[position].title
+        holder.movieDate.text = movieList[position].releaseDate
     }
 
     inner class MovieDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val movieTitle = itemView.findViewById<TextView>(R.id.movie_detail_title_movie)
+        val movieDate = itemView.findViewById<TextView>(R.id.movie_detail_date_movie)
         val movieImage = itemView.findViewById<ImageView>(R.id.movie_detail_image_movie)
 
     }

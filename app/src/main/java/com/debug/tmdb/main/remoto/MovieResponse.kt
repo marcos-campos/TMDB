@@ -1,30 +1,31 @@
 package com.debug.tmdb.main.remoto
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieResponse(
-    @SerialName("adult") val adult: Boolean,
-    @SerialName("backdrop_path") val backdropPath: String,
-    @SerialName("genre_ids") val genreIds: List<Int>,
-    @SerialName("id") val id: Int,
-    @SerialName("original_language") val originalLanguage: String,
-    @SerialName("original_title") val originalTitle: String,
-    @SerialName("overview") val overview: String,
-    @SerialName("popularity") val popularity: Double,
-    @SerialName("poster_path") val posterPath: String,
-    @SerialName("release_date") val releaseDate: String,
-    @SerialName("title") val title: String,
-    @SerialName("video") val video: Boolean,
-    @SerialName("vote_average") val voteAverage: Double,
-    @SerialName("vote_count") val voteCount: Int
+    @SerializedName("adult") val adult: Boolean,
+    @SerializedName("backdrop_path") val backdropPath: String,
+    @SerializedName("genre_ids") val genreIds: List<Int>,
+    @SerializedName("id") val id: Int,
+    @SerializedName("original_language") val originalLanguage: String,
+    @SerializedName("original_title") val originalTitle: String,
+    @SerializedName("overview") val overview: String,
+    @SerializedName("popularity") val popularity: Double,
+    @SerializedName("poster_path") val posterPath: String,
+    @SerializedName("release_date") val releaseDate: String,
+    @SerializedName("title") val title: String,
+    @SerializedName("video") val video: Boolean,
+    @SerializedName("vote_average") val voteAverage: Double,
+    @SerializedName("vote_count") val voteCount: Int
 )
 
-
+@Serializable
 data class BaseResponse<out T>(
-    @SerialName("page") val page: Int,
-    @SerialName("results") val results: T,
-    @SerialName("total_pages") val totalPages: Int,
-    @SerialName("total_results") val totalResults: Int
+    @SerializedName("page") val page: Int,
+    @SerializedName("results") val results: T,
+    @SerializedName("total_pages") val totalPages: Int,
+    @SerializedName("total_results") val totalResults: Int
 )
