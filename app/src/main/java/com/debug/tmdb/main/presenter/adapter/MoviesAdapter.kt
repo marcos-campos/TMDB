@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.debug.tmdb.R
-import com.debug.tmdb.main.remoto.MovieResponse
+import com.debug.tmdb.main.data.model.MovieResponse
 import com.squareup.picasso.Picasso
 
 class MoviesAdapter(

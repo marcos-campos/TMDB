@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.debug.tmdb.BuildConfig
 import com.debug.tmdb.R
-import com.debug.tmdb.main.remoto.ServiceProvider
 
 class LoginFragment : Fragment() {
 

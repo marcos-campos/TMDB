@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.debug.tmdb.R
-import com.debug.tmdb.main.remoto.ComicBookMoviesResponse
+import com.debug.tmdb.main.data.model.ComicBookMoviesResponse
 import com.squareup.picasso.Picasso
 
 class ComicBookMovieAdapter(
@@ -22,7 +22,7 @@ class ComicBookMovieAdapter(
         return ComicBookMovieViewHolder(comicBookDetailsItem)
     }
 
-    override fun onBindViewHolder(holder: ComicBookMovieAdapter.ComicBookMovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ComicBookMovieViewHolder, position: Int) {
 
         val baseUrl = "https://image.tmdb.org/t/p/"
         val imageSize = "w500/"

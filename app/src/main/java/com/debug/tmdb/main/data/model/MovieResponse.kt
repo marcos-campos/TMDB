@@ -1,7 +1,6 @@
-package com.debug.tmdb.main.remoto
+package com.debug.tmdb.main.data.model
 
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

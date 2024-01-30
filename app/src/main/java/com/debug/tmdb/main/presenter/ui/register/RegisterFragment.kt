@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.ui.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

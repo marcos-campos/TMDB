@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,14 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.debug.tmdb.BuildConfig
 import com.debug.tmdb.R
-import com.debug.tmdb.main.remoto.MovieResponse
-import com.debug.tmdb.main.remoto.ComicBookMoviesResponse
-import com.debug.tmdb.main.remoto.ServiceProvider
+import com.debug.tmdb.main.presenter.adapter.ComicBookMovieAdapter
+import com.debug.tmdb.main.presenter.adapter.MoviesAdapter
+import com.debug.tmdb.main.data.model.MovieResponse
+import com.debug.tmdb.main.data.model.ComicBookMoviesResponse
+import com.debug.tmdb.main.data.repository.ServiceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,11 +36,15 @@ class HomeFragment : Fragment() {
     private val comicBookMovieList = mutableListOf<ComicBookMoviesResponse>()
     private var adapterMovieDetail: MoviesAdapter? = null
     private var adapterComicBookDetail: ComicBookMovieAdapter? = null
+    private lateinit var homeViewModel: HomeViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -71,68 +80,21 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getMovies() {
-        lifecycleScope.launch(Dispatchers.IO){
 
-            try{
-                val value = ServiceProvider.service.getMovies(BuildConfig.tmdbToken)
-
-                withContext(Dispatchers.Main){
-                    movieList.addAll(value.results)
-                    adapterMovieDetail?.notifyDataSetChanged()
-                }
-            } catch (exception: HttpException) {
-                when(exception.code()){
-                    HttpURLConnection.HTTP_BAD_REQUEST -> {
-                        //error 400
-                    }
-                    HttpURLConnection.HTTP_NOT_FOUND -> {
-                        //error 404
-                    }
-                    HttpURLConnection.HTTP_INTERNAL_ERROR -> {
-                        //error 500
-                    }
-                    else -> {
-                        //some other error
-                    }
-                }
-
-            } catch (exception: Exception){
-                Log.e("error", exception.toString())
-            }
-        }
+        homeViewModel.getMovies()
+        homeViewModel.moviesLiveData.observe(viewLifecycleOwner, Observer {
+            movieList.addAll(it)
+            adapterMovieDetail?.notifyDataSetChanged()
+        })
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getComicBookMovies() {
-        lifecycleScope.launch(Dispatchers.IO) {
 
-            try {
-                val value = ServiceProvider.service.getComicBookMovies(1, BuildConfig.tmdbToken)
-
-                withContext(Dispatchers.Main) {
-                    comicBookMovieList.addAll(value.items)
-                    adapterComicBookDetail?.notifyDataSetChanged()
-                }
-            } catch (exception: HttpException) {
-                when(exception.code()){
-                    HttpURLConnection.HTTP_BAD_REQUEST -> {
-                        //error 400
-                    }
-                    HttpURLConnection.HTTP_NOT_FOUND -> {
-                        //error 404
-                    }
-                    HttpURLConnection.HTTP_INTERNAL_ERROR -> {
-                        //error 500
-                    }
-                    else -> {
-                        //some other error
-                    }
-                }
-
-            } catch (exception: Exception){
-                Log.e("error", exception.toString())
-            }
-
-        }
+        homeViewModel.getComicBooksMovies()
+        homeViewModel.comicBookMoviesLiveData.observe(viewLifecycleOwner, Observer {
+            comicBookMovieList.addAll(it)
+            adapterComicBookDetail?.notifyDataSetChanged()
+        })
     }
 }

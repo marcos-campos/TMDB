@@ -1,5 +1,9 @@
-package com.debug.tmdb.main.remoto
+package com.debug.tmdb.main.data.repository
 
+import com.debug.tmdb.main.data.model.BaseResponse
+import com.debug.tmdb.main.data.model.ComicBookMoviesResponse
+import com.debug.tmdb.main.data.model.ListMoviesResponse
+import com.debug.tmdb.main.data.model.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

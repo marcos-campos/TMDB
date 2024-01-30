@@ -1,12 +1,11 @@
-package com.debug.tmdb.main.remoto
+package com.debug.tmdb.main.data.repository
 
-import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val baseUrl = "https://api.themoviedb.org/3/"
-
 object ServiceProvider {
+
+    private const val baseUrl = "https://api.themoviedb.org/3/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
