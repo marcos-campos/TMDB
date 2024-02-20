@@ -1,4 +1,4 @@
-package com.debug.tmdb.main
+package com.debug.tmdb.main.presenter.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
