@@ -28,7 +28,7 @@ object DataModule {
 
     private fun networkModule() : Module {
         return module {
-            single { createService(get(), get()) }
+            single <MovieService> { createService(get(), get()) }
 
             single { GsonBuilder().create() }
 
@@ -49,17 +49,16 @@ object DataModule {
     private const val baseUrl = "https://api.themoviedb.org/3/"
     private const val OK_HTTP = "Ok http"
 
-    private fun createService(
+    private inline fun <reified T> createService(
         factory: Gson,
         client: OkHttpClient
-    ): MovieService {
+    ): T {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(factory))
             .client(client)
             .build()
-            .create(MovieService::class.java)
-
+            .create(T::class.java)
     }
 
 }
